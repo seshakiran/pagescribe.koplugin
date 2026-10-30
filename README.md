@@ -4,12 +4,7 @@ Write on your books with a pen while keeping KOReader’s native finger text sel
 
 ## Feature video
 
-[![Watch the feature video](docs/media/video-poster.jpg)](https://github.com/seshakiran/pagescribe.koplugin/releases/download/v0.12.0/pagescribe-dictionary-audio-walkthrough.mp4)
-
-[**Watch the video with sound**](https://github.com/seshakiran/pagescribe.koplugin/releases/download/v0.12.0/pagescribe-dictionary-audio-walkthrough.mp4)
-
-
-Derived from [SMUsamaShah/fingerink.koplugin](https://github.com/SMUsamaShah/fingerink.koplugin), with the upstream Git history and AGPL-3.0 license retained. Development continues here independently of [the earlier fork](https://github.com/seshakiran/fingerink.koplugin).
+<video src="https://github.com/seshakiran/pagescribe.koplugin/releases/download/v0.12.0/pagescribe-dictionary-audio-walkthrough.mp4" controls="controls" width="100%" poster="https://raw.githubusercontent.com/seshakiran/pagescribe.koplugin/main/docs/media/video-poster.jpg"></video>
 
 ## Install
 
