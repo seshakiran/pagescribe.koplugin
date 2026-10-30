@@ -4,7 +4,7 @@ Write on your books with a pen while keeping KOReader’s native finger text sel
 
 ## Feature video
 
-<video src="https://github.com/seshakiran/pagescribe.koplugin/releases/download/v0.12.0/pagescribe-dictionary-audio-walkthrough.mp4" controls="controls" width="100%" poster="https://raw.githubusercontent.com/seshakiran/pagescribe.koplugin/main/docs/media/video-poster.jpg"></video>
+https://github.com/user-attachments/assets/561f65a5-9c4f-4087-a0ba-2a357c53295f
 
 ## Install
 
