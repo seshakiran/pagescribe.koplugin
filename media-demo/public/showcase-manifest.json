@@ -1,0 +1,21 @@
+{
+  "resolution": "1920x1080",
+  "fps": 30,
+  "duration_seconds": 48.4,
+  "kind": "rendered-ui-feature-preview",
+  "screenshots": [
+    "01-write.png",
+    "02-select.png",
+    "03-colors.png",
+    "04-tray.png",
+    "05-dictionary-audio.png",
+    "06-audio-settings.png",
+    "07-together.png"
+  ],
+  "source_versions": {
+    "PageScribe": "0.12.0",
+    "Dictionary Audio": "0.4.0"
+  },
+  "remotion": "4.0.539",
+  "audio": "original synthesized bed and one synthetic Piper Spanish word at 85% playback speed"
+}

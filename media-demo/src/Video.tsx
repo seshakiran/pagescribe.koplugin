@@ -1,0 +1,10 @@
+import React from 'react';
+import {AbsoluteFill,Img,Sequence,staticFile,useCurrentFrame,interpolate} from 'remotion';
+import {Audio} from '@remotion/media';
+import {TransitionSeries,linearTiming} from '@remotion/transitions';
+import {fade} from '@remotion/transitions/fade';
+import {scenes} from './FeatureSlide';
+export const lengths=[210,240,240,210,270,240,150];
+export const DURATION=lengths.reduce((a,b)=>a+b,0)-18*(lengths.length-1);
+const Photo:React.FC<{name:string;duration:number}>=({name,duration})=>{const f=useCurrentFrame();const scale=interpolate(f,[0,duration],[1,1.018],{extrapolateRight:'clamp'});return <AbsoluteFill><Img src={staticFile(`screenshots/${name}.png`)} style={{width:'100%',height:'100%',transform:`scale(${scale})`}}/></AbsoluteFill>};
+export const Walkthrough:React.FC=()=>{const f=useCurrentFrame();return <AbsoluteFill style={{background:'#f4f2eb'}}><TransitionSeries>{scenes.map((s,i)=><React.Fragment key={s.slug}><TransitionSeries.Sequence durationInFrames={lengths[i]}><Photo name={s.slug} duration={lengths[i]}/></TransitionSeries.Sequence>{i<scenes.length-1&&<TransitionSeries.Transition presentation={fade()} timing={linearTiming({durationInFrames:18})}/>}</React.Fragment>)}</TransitionSeries><Audio src={staticFile('audio/bed.wav')} volume={.7}/><Sequence from={918}><Audio src={staticFile('audio/libro-slower.wav')} volume={.95}/></Sequence><div style={{position:'absolute',left:0,bottom:0,height:4,width:`${f/(DURATION-1)*100}%`,background:'#2358b8'}}/></AbsoluteFill>};
