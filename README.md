@@ -39,7 +39,9 @@ Page overlays on reflowable books are tied to page layout. Keep font size, margi
 
 ## Optional dictionary audio
 
-Dictionary pronunciation is independent of handwriting and is not bundled here. Existing installations can keep the separate **dictionary-audio.koplugin** plugin and their downloaded packs. Its source and separate ZIP remain in the [earlier repository](https://github.com/seshakiran/fingerink.koplugin/tree/main/dictionary-audio.koplugin) and its [v0.11.0 release](https://github.com/seshakiran/fingerink.koplugin/releases/tag/v0.11.0).
+Dictionary pronunciation has its own standalone repository: [Dictionary Audio](https://github.com/seshakiran/dictionary-audio.koplugin), with its own [release ZIP](https://github.com/seshakiran/dictionary-audio.koplugin/releases/latest), updater and pack-building tools. PageScribe and Dictionary Audio can each be used independently. Existing installations keep the same **dictionary-audio.koplugin** folder, language preferences and downloaded packs.
+
+To use everything together, install the PageScribe ZIP and Dictionary Audio ZIP into KOReader’s plugins directory, keep or install the audio packs described in the Dictionary Audio README, and restart KOReader. PageScribe’s **Audio** button opens Dictionary Audio settings; native dictionary lookups provide **Hear English** and **Hear Spanish**.
 
 If that plugin is loaded, PageScribe shows an **Audio** shortcut. Otherwise, the tray omits Audio. No large dictionary, voice model or pronunciation pack is downloaded by this plugin.
 
