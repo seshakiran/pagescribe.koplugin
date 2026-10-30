@@ -2,17 +2,11 @@
 
 Write on your books with a pen while keeping KOReader’s native finger text selection. PageScribe is a standalone KOReader plugin: handwriting requires no dictionary, audio pack, account or companion plugin.
 
-## Watch the features
+## Feature video
 
-[![PageScribe and Dictionary Audio feature walkthrough](docs/media/showcase-preview.gif)](https://github.com/seshakiran/pagescribe.koplugin/releases/download/v0.12.0/pagescribe-dictionary-audio-walkthrough.mp4)
+[![Watch the feature video](docs/media/video-poster.jpg)](https://github.com/seshakiran/pagescribe.koplugin/releases/download/v0.12.0/pagescribe-dictionary-audio-walkthrough.mp4)
 
-[**Watch the 48-second 1080p video with sound**](https://github.com/seshakiran/pagescribe.koplugin/releases/download/v0.12.0/pagescribe-dictionary-audio-walkthrough.mp4) · [Screenshot gallery](docs/media/README.md) · [Remotion source](https://github.com/seshakiran/pagescribe.koplugin/tree/main/media-demo)
-
-Rendered color UI previews with illustrative book/dictionary content—not tablet captures or real-time performance footage. The video includes a synthetic Spanish pronunciation example.
-
-| Pen writing | Native finger text selection |
-| --- | --- |
-| ![Feature preview](docs/media/01-write.png) | ![Feature preview](docs/media/02-select.png) |
+[**Watch the video with sound**](https://github.com/seshakiran/pagescribe.koplugin/releases/download/v0.12.0/pagescribe-dictionary-audio-walkthrough.mp4)
 
 
 Derived from [SMUsamaShah/fingerink.koplugin](https://github.com/SMUsamaShah/fingerink.koplugin), with the upstream Git history and AGPL-3.0 license retained. Development continues here independently of [the earlier fork](https://github.com/seshakiran/fingerink.koplugin).
