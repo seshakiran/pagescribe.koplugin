@@ -4,7 +4,7 @@ set -eu
 repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 output_dir=${1:-"$repo_root/dist"}
 staging_dir=$(mktemp -d)
-archive_path="$output_dir/fingerink.koplugin.zip"
+archive_path="$output_dir/pagescribe.koplugin.zip"
 temporary_archive="$staging_dir/fingerink.koplugin.zip"
 
 metadata_version=$(sed -n 's/^[[:space:]]*version[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' \
@@ -34,8 +34,4 @@ done
 )
 mv "$temporary_archive" "$archive_path"
 
-(
-    cd "$repo_root"
-    zip -qr "$output_dir/dictionary-audio.koplugin.zip" dictionary-audio.koplugin -i '*.lua'
-)
-echo "Created $archive_path and dictionary-audio.koplugin.zip"
+echo "Created $archive_path"

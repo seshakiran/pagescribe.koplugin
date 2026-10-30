@@ -83,7 +83,7 @@ function InkBar:init()
     self.color_mode=not not (Device.hasColorScreen and Device:hasColorScreen() and BB.ColorRGB32 and BB.TYPE_BBRGB32)
     self.palette=THEMES[self.color_mode and "color" or "mono"];self.color_cache={}
     self.expanded=false;self.labels={}
-    self.hub_w,self.hub_h=self:S(48),self:S(30)
+    self.hub_w,self.hub_h=self:S(54),self:S(54)
     local default_x=self.side=="left" and 8 or Screen:getWidth()-self.hub_w-8
     local default_y=round((Screen:getHeight()-self.hub_h)/2)
     -- Move the previous bottom-edge default above the reader's progress bar.
@@ -121,7 +121,12 @@ end
 function InkBar:getVisibleDimen() return self.dimen end
 function InkBar:getSize() return self.dimen end
 function InkBar:contains(x,y)
-    local d=self.dimen;return x>=d.x and y>=d.y and x<d.x+d.w and y<d.y+d.h
+    local d=self.dimen
+    if not self.expanded then
+        local dx,dy=x-(d.x+d.w/2),y-(d.y+d.h/2)
+        return dx*dx+dy*dy<=(d.w/2)^2
+    end
+    return x>=d.x and y>=d.y and x<d.x+d.w and y<d.y+d.h
 end
 function InkBar:setExpanded(on)
     on=on and true or false
@@ -185,7 +190,9 @@ function InkBar:buttons()
     add("eraser",_("Erase"),234,4,62,40,active=="eraser")
     add("undo",_("Undo"),298,4,52,40,false,self:canUndo())
     add("note",_("Notes"),352,4,58,40)
-    add("audio",_("Audio"),412,4,64,40)
+    if p.ui.dictionary_audio and p.ui.dictionary_audio.showSettings then
+        add("audio",_("Audio"),412,4,64,40)
+    end
     add("collapse","×",508,4,28,28)
     if active~="read" then
         local widths=active=="highlight" and {12,24,36} or {2,4,7,9,10,12}
@@ -211,7 +218,7 @@ end
 -- Draw the launcher as a pen nib and handwriting, without font glyphs/assets.
 function InkBar:handwritingIcon(bb,color)
     local function line(ax,ay,bx,by)
-        local x,y,ex,ey=self:S(ax),self:S(ay),self:S(bx),self:S(by)
+        local x,y,ex,ey=self:S(3+ax*1.15),self:S(10+ay*1.15),self:S(3+bx*1.15),self:S(10+by*1.15)
         local dx,dy=math.abs(ex-x),-math.abs(ey-y)
         local sx,sy=x<ex and 1 or -1,y<ey and 1 or -1
         local err=dx+dy
@@ -234,9 +241,12 @@ function InkBar:render()
     local d,p,info=self.dimen,self.palette,self:displayInfo()
     self.info=info;self.undo_available=self:canUndo()
     local bb=BB.new(d.w,d.h,self.color_mode and BB.TYPE_BBRGB32 or Screen.bb:getType());self.surface=bb
-    self:rect(bb,0,0,d.w,d.h,p.line,self:S(5))
+    -- Initialize every pixel, including corners outside rounded shapes.
+    self:rect(bb,0,0,d.w,d.h,p.shell)
+    self:rect(bb,0,0,d.w,d.h,p.line,self.expanded and self:S(5) or floor(math.min(d.w,d.h)/2))
     local edge=self:S(1)
-    self:rect(bb,edge,edge,d.w-2*edge,d.h-2*edge,p.shell,self:S(4))
+    self:rect(bb,edge,edge,d.w-2*edge,d.h-2*edge,p.shell,
+        self.expanded and self:S(4) or floor((math.min(d.w,d.h)-2*edge)/2))
     local function box(x,y,w,h,color,radius)
         self:rect(bb,self:S(x),self:S(y),self:S(w),self:S(h),color,radius and self:S(radius))
     end
@@ -245,7 +255,8 @@ function InkBar:render()
     end
     local active=p[info.id]
     if not self.expanded then
-        box(2,2,44,26,active,3)
+        local inset=self:S(2)
+        self:rect(bb,inset,inset,d.w-2*inset,d.h-2*inset,active,floor((math.min(d.w,d.h)-2*inset)/2))
         self:handwritingIcon(bb,p.white)
         return
     end
@@ -279,7 +290,19 @@ function InkBar:paintTo(bb)
     if self.surface and self.undo_available~=self:canUndo() then self:update(false) end
     if not self.surface then self:render() end
     local d=self.dimen
-    bb:blitFrom(self.surface,d.x,d.y,0,0,d.w,d.h)
+    if self.expanded then
+        bb:blitFrom(self.surface,d.x,d.y,0,0,d.w,d.h)
+    else
+        -- Copy only the circular button. Page text outside it stays untouched.
+        local radius=d.w/2
+        for row=0,d.h-1 do
+            local dy=row+.5-d.h/2
+            local extent=math.sqrt(math.max(0,radius*radius-dy*dy))
+            local left=math.max(0,math.ceil(radius-extent-.5))
+            local right=math.min(d.w-1,floor(radius+extent-.5))
+            if right>=left then bb:blitFrom(self.surface,d.x+left,d.y+row,left,row,right-left+1,1) end
+        end
+    end
 end
 function InkBar:activate(id)
     local p=self.plugin

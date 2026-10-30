@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: fingerink-release
+  group: pagescribe-release
   cancel-in-progress: false
 
 jobs:
@@ -69,7 +69,7 @@ jobs:
           VERSION: ${{ steps.metadata.outputs.version }}
           TARGET_SHA: ${{ steps.source.outputs.sha }}
         run: >-
-          gh release create "$TAG" dist/fingerink.koplugin.zip dist/dictionary-audio.koplugin.zip
+          gh release create "$TAG" dist/pagescribe.koplugin.zip
           --target "$TARGET_SHA"
           --title "PageScribe $VERSION"
           --generate-notes

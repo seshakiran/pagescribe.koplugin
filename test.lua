@@ -321,7 +321,7 @@ do
         error("Missing button "..id)
     end
     check("collapsed tab names actual mode",bar:displayInfo().status,"Read active")
-    check("closed tray has tiny footprint",bar.dimen.w<=48 and bar.dimen.h<=30,true)
+    check("closed tray has tiny footprint",bar.dimen.w<=54 and bar.dimen.h<=54,true)
     check("page taps are forwarded",gesture("tap",10,10),"reader")
     open();check("status tab opens tray",bar.expanded,true)
     check("reading tray is one slim row",bar.dimen.h,48)
@@ -441,7 +441,7 @@ do
     BB.new=function(w,h) return buffer(w,h) end
     local screen={blitFrom=function(_,surface,px,py,sx,sy,w,h)
         assert(px%1==0 and py%1==0 and px>=0 and py>=0 and px+w<=Screen:getWidth() and py+h<=Screen:getHeight())
-        assert(surface.w==w and surface.h==h)
+        assert(sx>=0 and sy>=0 and sx+w<=surface.w and sy+h<=surface.h)
     end}
     local old_scale=Screen.scaleBySize
     for _,scale in ipairs({1,1.75,2.5,3}) do
@@ -449,7 +449,7 @@ do
         local b=InkBar:new{plugin=p};p.bar=b
         local compact_w,compact_scale=b.dimen.w,b.scale
         b:setExpanded(true)
-        check("small launcher preserved at DPI "..scale,compact_w,math.floor(48*math.min(scale,1.5)+.5))
+        check("small launcher preserved at DPI "..scale,compact_w,math.floor(54*math.min(scale,1.5)+.5))
         check("expanded tray uses available DPI "..scale,b.scale>=compact_scale,true)
 
         for _,tool in ipairs(b.tools) do

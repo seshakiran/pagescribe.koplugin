@@ -44,7 +44,7 @@ local FingerInk = WidgetContainer:extend{
 }
 
 local updater = dofile(plugin_dir .. "pluginupdater.lua").new{
-    repository = "seshakiran/fingerink.koplugin",
+    repository = "seshakiran/pagescribe.koplugin",
     branch = "main",
     folder = "fingerink.koplugin",
 }

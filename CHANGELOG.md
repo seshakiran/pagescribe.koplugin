@@ -1,3 +1,13 @@
+## 0.12.0 — standalone PageScribe repository
+
+- Publish handwriting as an independent repository and release package.
+- Make the launcher circular and slightly larger, with page-preserving masked painting and initialized corner pixels.
+- Keep native pen writing, native finger text selection, inline modes/colors, draggable controls and notebook exports.
+- Remove dictionary/audio plugin sources and generation tools from the current distribution; audio remains an optional separate install.
+- Show the tray Audio shortcut only when the optional Dictionary audio plugin is loaded.
+- Preserve upstream Git history, AGPL-3.0 attribution, the existing install folder, settings and saved notes.
+- Point the built-in updater to the standalone repository.
+
 ## 0.11.0 — native finger highlights and close control
 
 - Add a small × in the tray's top-right corner to close all inline options while keeping the launcher.
