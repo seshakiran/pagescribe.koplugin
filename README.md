@@ -8,6 +8,21 @@ https://github.com/user-attachments/assets/561f65a5-9c4f-4087-a0ba-2a357c53295f
 
 ## Install
 
+**Yes: the release ZIP contains `fingerink.koplugin`, and that is the folder to copy.** There is no separate `pagescribe.koplugin` folder. **PageScribe** is the name you will see inside KOReader; `fingerink.koplugin` is the retained installation folder name.
+
+Download the release asset named **pagescribe.koplugin.zip**, rather than GitHub’s automatically generated “Source code” ZIP. After extracting, the layout on your device should be:
+
+```text
+koreader/
+└── plugins/
+    └── fingerink.koplugin/
+        ├── main.lua
+        └── _meta.lua
+```
+
+Copy the whole `fingerink.koplugin` folder, not just its files. Do not copy the ZIP itself into `plugins`, nest the folder twice, or rename it to `pagescribe.koplugin`. The spelling is **fingerink**, without an extra “l”.
+
+
 1. Download **pagescribe.koplugin.zip** from the [latest release](https://github.com/seshakiran/pagescribe.koplugin/releases/latest).
 2. Extract it and copy the included **fingerink.koplugin** folder into KOReader’s **plugins** directory.
 3. Fully close and reopen KOReader, enable **PageScribe** in the plugin manager if needed, and open a book.
@@ -16,6 +31,15 @@ https://github.com/user-attachments/assets/561f65a5-9c4f-4087-a0ba-2a357c53295f
 The final path is `koreader/plugins/fingerink.koplugin/main.lua`. The legacy folder name is intentional: it preserves settings, notes, gesture assignments and upgrades. **Replace the existing folder; do not install a second copy or rename it.** The built-in updater now follows this repository.
 
 KOReader 2026.03 or newer supports finger drawing. Native pen input requires a KOReader build and device with the stylus callback API. PDF ink export requires KOReader 2026.07 or newer. Development has used a Viwoods AiPaper Mini with KOReader v2026.07.2-206; behavior on other hardware still needs device testing. Disable competing handwriting capture plugins while using PageScribe.
+
+## First use
+
+1. Fully restart KOReader after copying the folder. If PageScribe is disabled, enable it in KOReader’s plugin manager and restart again.
+2. **Open a book.** The handwriting launcher appears inside the reader, midway down the right edge; it does not appear on the library/home screen.
+3. Tap the round handwriting icon, then choose **Pen**. On a compatible build, write with your pen while your finger long-presses text for normal KOReader selection.
+4. Choose **Read** to return to reading. The **×** closes the toolbar; tap the launcher to reopen it. Drag the launcher or toolbar to move it away from text.
+
+If the icon is absent inside a book, check that the file really is at `koreader/plugins/fingerink.koplugin/main.lua`, confirm PageScribe is enabled, and restart KOReader. If the icon appears but the pen does not draw, check the stylus compatibility requirements below and disable competing handwriting plugins. Finger drawing is available through **Finger draws** on supported builds.
 
 ## Tools and input
 
