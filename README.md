@@ -32,6 +32,8 @@ The final path is `koreader/plugins/fingerink.koplugin/main.lua`. The legacy fol
 
 KOReader 2026.03 or newer supports finger drawing. Native pen input requires a KOReader build and device with the stylus callback API. PDF ink export requires KOReader 2026.07 or newer. Development has used a Viwoods AiPaper Mini with KOReader v2026.07.2-206; behavior on other hardware still needs device testing. Disable competing handwriting capture plugins while using PageScribe.
 
+![PageScribe tools and optional audio, shown in rendered UI previews](docs/media/pagescribe-guide.gif)
+
 ## First use
 
 1. Fully restart KOReader after copying the folder. If PageScribe is disabled, enable it in KOReader’s plugin manager and restart again.
