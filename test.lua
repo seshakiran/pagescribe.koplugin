@@ -419,6 +419,60 @@ do
     UIManager._window_stack={{widget=reader},{widget=menu},{widget=bar}}
     check("page tap forwards to an open dialog",gesture("tap",500,500),"menu")
     UIManager._window_stack={{widget=reader},{widget=bar}}
+    -- UIManager offers dispatched actions to the top window, its active
+    -- widgets, then active widgets of lower windows. A gesture may dispatch
+    -- a second event through this path while ReaderUI handles the first one.
+    local function send(event)
+        local top
+        for i=#UIManager._window_stack,1,-1 do
+            local w=UIManager._window_stack[i].widget
+            if not w.toast then top=w;break end
+        end
+        if top:handleEvent(event) then return true end
+        local function active(w)
+            for _,a in ipairs(w.active_widgets or {}) do
+                if a:handleEvent(event) then return true end
+            end
+        end
+        if active(top) then return true end
+        for i=#UIManager._window_stack,1,-1 do
+            local w=UIManager._window_stack[i].widget
+            if w~=top then
+                if active(w) then return true end
+                if w.is_always_active and w:handleEvent(event) then return true end
+            end
+        end
+    end
+    local bookmark_calls,gesture_calls=0,0
+    function reader:onToggleBookmark() bookmark_calls=bookmark_calls+1;return true end
+    local original_gesture=reader.onGesture
+    function reader:onGesture()
+        gesture_calls=gesture_calls+1
+        send(Event:new("ToggleBookmark"))
+        return true
+    end
+    -- Move the launcher away from the native bookmark corner.
+    local saved_position={x=bar.dimen.x,y=bar.dimen.y}
+    bar.position={x=400,y=400};bar:layout()
+    send(Event:new("Gesture",{ges="tap",pos={x=590,y=5}}))
+    check("corner gesture dispatches bookmark through toolbar",bookmark_calls,1)
+    check("corner gesture reaches reader once",gesture_calls,1)
+    UIManager._window_stack={{widget=reader},{widget=bar},{widget=menu}}
+    send(Event:new("ToggleBookmark"))
+    check("action relay does not bypass a dialog",bookmark_calls,1)
+    UIManager._window_stack={{widget=reader},{widget=bar},{widget={toast=true}}}
+    send(Event:new("ToggleBookmark"))
+    check("toast does not block reader actions",bookmark_calls,2)
+    UIManager._window_stack={{widget=reader},{widget=bar}}
+    local flush_calls=0
+    function reader:onFlushSettings() flush_calls=flush_calls+1 end
+    bar:handleEvent(Event:new("FlushSettings"))
+    check("toolbar lifecycle does not flush reader again",flush_calls,0)
+    function reader:onGesture() gesture_calls=gesture_calls+1 end
+    send(Event:new("Gesture",{ges="tap",pos={x=590,y=5}}))
+    check("unhandled input is not relayed twice",gesture_calls,2)
+    reader.onGesture=original_gesture
+    bar.position=saved_position;bar:layout()
     p.drawing=true;p.highlighter=false;p.eraser=false;p.stylus_only=true;p.input_mode="pen_only"
     check("status names actual width and input",bar:displayInfo().detail,"7 px · Pen only")
     p.store={get=function() return {} end}

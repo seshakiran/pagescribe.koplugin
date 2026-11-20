@@ -1,3 +1,9 @@
+## 0.12.1 — restore reader gesture actions
+
+- Keep KOReader's dispatched reader actions reachable while the floating toolbar is visible, including the top-right bookmark gesture.
+- Preserve dialog precedence and avoid forwarding input or lifecycle events twice.
+- Add regression coverage for a tap that dispatches ToggleBookmark through UIManager.
+
 ## 0.12.0 — standalone PageScribe repository
 
 - Publish handwriting as an independent repository and release package.

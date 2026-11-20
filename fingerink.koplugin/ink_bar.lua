@@ -75,6 +75,22 @@ function InkBar:textTarget(bb)
 end
 
 function InkBar:init()
+    -- Gesture actions (e.g. ToggleBookmark) are dispatched as a second event
+    -- through UIManager. Its top window is this toolbar, not ReaderUI. Relay
+    -- those events through active_widgets so broadcast/lifecycle events are
+    -- not duplicated, and never bypass a dialog above the toolbar.
+    self.active_widgets={{handleEvent=function(_,event)
+        if INPUT[event.handler] then return end
+        for i=#UIManager._window_stack,1,-1 do
+            local widget=UIManager._window_stack[i].widget
+            if not widget.toast then
+                if widget~=self then return end
+                local below=self:windowBelow()
+                if below then return below:handleEvent(event) end
+                return
+            end
+        end
+    end}}
     self.base_scale=Screen:scaleBySize(100)/100
     self.compact_scale=math.min(self.base_scale,1.5)
     self.expanded_scale=math.min(self.base_scale,(Screen:getWidth()-8)/540,(Screen:getHeight()-8)/176)
