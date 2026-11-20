@@ -3,6 +3,7 @@
 - Keep KOReader's dispatched reader actions reachable while the floating toolbar is visible, including the top-right bookmark gesture.
 - Preserve dialog precedence and avoid forwarding input or lifecycle events twice.
 - Add regression coverage for a tap that dispatches ToggleBookmark through UIManager.
+- Confirm native bookmarking with PageScribe and DogEarBooks enabled together on a Viwoods AiPaper Mini.
 
 ## 0.12.0 — standalone PageScribe repository
 

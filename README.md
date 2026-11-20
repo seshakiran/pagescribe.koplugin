@@ -81,6 +81,12 @@ Run `lua5.1 test.lua` for capture, native selection, tool state, moved-tray inte
 
 ## Troubleshooting
 
+### Bookmarks and DogEarBooks
+
+Use **PageScribe 0.12.1 or newer** with [DogEarBooks](https://github.com/seshakiran/dogearbooks.koplugin). Earlier PageScribe versions could block KOReader's **Toggle bookmark** action even in Read mode with the tray closed. The fix lets KOReader's dispatched reader actions reach the reader beneath the floating toolbar, while keeping dialogs in control and avoiding duplicate input events. DogEarBooks itself does not need a runtime patch for this issue.
+
+Restart KOReader after updating. Open a book, choose **Read**, close the tray with **×**, and tap the very top-right corner with your finger. Tap again to remove the bookmark. DogEarBooks changes the image on bookmarked pages; choose it under **Typesetting → dogearbooks → Charm Library** or **Folders**, and use **Charm Studio** for size and position. Both plugins were confirmed working together on a Viwoods AiPaper Mini after this fix; other device/build combinations still need testing.
+
 For an intermittent stray mark or overlay, note its appearance, active tool, input mode and book format, and whether a page turn or full refresh clears it. That distinguishes a saved stroke from a display-refresh artifact. Restart KOReader after plugin updates.
 
 ## License and attribution
