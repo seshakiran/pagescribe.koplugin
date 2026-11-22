@@ -28,6 +28,8 @@ for file in _meta.lua main.lua ink_bar.lua ink_capture.lua ink_pdf.lua \
         "$staging_dir/fingerink.koplugin/$file"
 done
 
+cp "$repo_root/LICENSE" "$staging_dir/fingerink.koplugin/LICENSE"
+
 (
     cd "$staging_dir"
     zip -qr "$temporary_archive" fingerink.koplugin

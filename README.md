@@ -2,6 +2,15 @@
 
 Write on your books with a pen while keeping KOReader’s native finger text selection. PageScribe is a standalone KOReader plugin: handwriting requires no dictionary, audio pack, account or companion plugin.
 
+## Install and update through the community App Store
+
+In [KOReader App Store](https://github.com/omer-faruq/appstore.koplugin), open **Tools → App Store → Plugins**, refresh the catalogue, and search for **PageScribe** or filter by owner **seshakiran**. Select **seshakiran/pagescribe.koplugin** and choose **Install**, then fully restart KOReader. If the entry is missing from a cached catalogue, use **Plugins → ⚙ → Install plugin from URL** and enter `https://github.com/seshakiran/pagescribe.koplugin`.
+
+For updates, open **App Store → Check plugin updates** and select this plugin. For a manually installed copy, use **Match with URL** once to associate it with the repository above. Update the existing installation and restart KOReader; do not create a second plugin folder. Release assets and repository archives both identify the same runtime folder, `fingerink.koplugin`.
+
+PageScribe intentionally retains the `fingerink.koplugin` folder and `fingerink` plugin identifier so updates preserve existing settings and notes. Do not rename it to `pagescribe.koplugin`. Dictionary Audio and DogEarBooks are optional, separate installations. Pen support still depends on the device and KOReader build described below.
+
+
 ## Feature video
 
 https://github.com/user-attachments/assets/561f65a5-9c4f-4087-a0ba-2a357c53295f

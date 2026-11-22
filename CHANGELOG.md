@@ -5,6 +5,11 @@
 - Add regression coverage for a tap that dispatches ToggleBookmark through UIManager.
 - Confirm native bookmarking with PageScribe and DogEarBooks enabled together on a Viwoods AiPaper Mini.
 
+## 0.12.2 — community marketplace support
+
+- Document App Store installation, repository matching and updates.
+- Keep a stable plugin identifier and explicit metadata version for update detection.
+
 ## 0.12.0 — standalone PageScribe repository
 
 - Publish handwriting as an independent repository and release package.

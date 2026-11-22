@@ -14,6 +14,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y lua5.1 zip unzip
+      - name: Verify marketplace metadata
+        run: lua5.1 scripts/check-marketplace.lua fingerink.koplugin/_meta.lua fingerink VERSION
       - name: Test
         run: |
           lua5.1 test.lua
@@ -26,6 +28,7 @@ jobs:
           unzip -t dist/pagescribe.koplugin.zip
           diff -u <(printf '%s\n' \
             fingerink.koplugin/ \
+            fingerink.koplugin/LICENSE \
             fingerink.koplugin/_meta.lua \
             fingerink.koplugin/ink_bar.lua \
             fingerink.koplugin/ink_capture.lua \
